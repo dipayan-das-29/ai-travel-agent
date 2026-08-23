@@ -1,0 +1,10 @@
+ddgs==9.15.0
+fastapi==0.141.1
+langchain==1.3.16
+langchain_core==1.6.0
+langchain_ollama==1.1.0
+langchain_openai==1.6.0
+langgraph==1.2.11
+pydantic==2.13.4
+python-dotenv==1.2.3
+uvicorn==0.52.4

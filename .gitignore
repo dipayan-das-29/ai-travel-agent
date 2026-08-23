@@ -1,0 +1,21 @@
+# Virtual Environments (Python)
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+
+# Environment Variables & Secrets
+.env
+*.env
+
+# Node Dependencies & Angular Build Outputs (Frontend)
+node_modules/
+/frontend/dist/
+/frontend/.angular/
+.vscode/
+.idea/
+
+# OS / Editor junk
+.DS_Store
+Thumbs.db

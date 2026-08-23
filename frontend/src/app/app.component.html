@@ -1,0 +1,74 @@
+<div class="workspace-container">
+  
+  <!-- Header Panel -->
+  <header class="app-header">
+    <div class="header-title">
+      <h1>✈️ Smart Travel Agent Workspace</h1>
+      <span class="model-badge">Ollama Cloud: gpt-oss:120b</span>
+    </div>
+    <div class="server-status">
+      <span class="status-indicator">●</span> Server Status: Connected
+    </div>
+  </header>
+
+  <!-- Prompt Input Card -->
+  <section class="card input-card">
+    <div class="card-header">
+      <h2>💬 YOUR TRAVEL PROMPT</h2>
+    </div>
+    <div class="card-body">
+      <textarea 
+        [(ngModel)]="userPrompt" 
+        rows="3" 
+        placeholder="e.g. Plan a 3-day budget trip to Kyoto for 1 person including flight and hotel costs...">
+      </textarea>
+      <div class="action-bar">
+        <button (click)="generateItinerary()" [disabled]="isLoading" class="btn-submit">
+          {{ isLoading ? '⚡ Agent Thinking...' : '🚀 Generate Itinerary' }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Two-Column Workspace -->
+  <div class="workspace-grid">
+    
+    <!-- Left Column: Live Agent Logs -->
+    <section class="card console-card">
+      <div class="card-header">
+        <h2>⚙️ AGENT EXECUTION LOGS</h2>
+        <span class="live-pill" *ngIf="isLoading">LIVE</span>
+      </div>
+      <div class="card-body console-body">
+        <div *ngIf="logs.length === 0" class="console-placeholder">
+          Agent event logs and tool execution details will appear here...
+        </div>
+        <div *ngFor="let log of logs" class="log-entry">
+          <span class="log-timestamp">[{{ log.timestamp }}]</span>
+          <span class="log-message" [ngClass]="log.type">{{ log.message }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Column: Final Generated Result -->
+    <section class="card output-card">
+      <div class="card-header">
+        <h2>📋 FINAL GENERATED ITINERARY</h2>
+      </div>
+      <div class="card-body output-body">
+        <div *ngIf="!itineraryOutput && !isLoading" class="output-placeholder">
+          Submit a query above to view the structured Markdown travel itinerary.
+        </div>
+        
+        <div *ngIf="isLoading && !itineraryOutput" class="spinner-container">
+          <div class="spinner"></div>
+          <p>Autonomous agent is searching rates and executing calculations...</p>
+        </div>
+
+        <pre *ngIf="itineraryOutput" class="markdown-preview">{{ itineraryOutput }}</pre>
+      </div>
+    </section>
+
+  </div>
+
+</div>
